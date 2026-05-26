@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周杰伦音乐播放器</title>
+  <link rel="stylesheet" href="css/player.css">
+</head>
+
+<body>
+  <div class="player-container">
+    <div class="player-header">
+      <h1>🎵 周杰伦音乐盒</h1>
+      <p class="subtitle">Jay Chou Music Player</p>
+    </div>
+
+    <div class="album-cover">
+      <div class="album-img" id="albumImg">🎶</div>
+    </div>
+
+    <div class="song-info">
+      <h2 id="songName">选择一首歌曲开始播放</h2>
+      <p id="artistName">周杰伦</p>
+    </div>
+
+    <div class="progress-container">
+      <span id="currentTime">0:00</span>
+      <div class="progress-bar" id="progressBar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="prevBtn">⏮️</button>
+      <button class="btn btn-play" id="playBtn">▶️</button>
+      <button class="btn" id="nextBtn">⏭️</button>
+    </div>
+
+    <div class="volume-container">
+      <span id="volumeIcon">🔊</span>
+      <input type="range" id="volumeSlider" min="0" max="100" value="70">
+      <span id="volumeValue">70%</span>
+    </div>
+
+    <div class="playlist">
+      <h3>📋 播放列表</h3>
+      <ul id="playlist"></ul>
+    </div>
+  </div>
+
+  <audio id="audio"></audio>
+  <script src="js/player.js"></script>
+</body>
+
+</html>
