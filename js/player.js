@@ -1,13 +1,20 @@
 const songs = [
-  { name: "暗号", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/暗号.mp3" },
-  { name: "等你下课", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/等你下课.mp3" },
-  { name: "反方向的钟", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/反方向的钟.mp3" },
-  { name: "轨迹", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/轨迹.mp3" },
-  { name: "红尘客栈", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/红尘客栈.mp3" },
-  { name: "你听得到", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/你听得到.mp3" },
-  { name: "七里香", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/七里香.mp3" },
-  { name: "晴天", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/晴天.mp3" },
-  { name: "甜甜的", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/甜甜的.mp3" }
+  { name: "暗号", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/暗号.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/八度空间.JPG" },
+  { name: "等你下课", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/等你下课.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/等你下课.JPG" },
+  { name: "反方向的钟", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/反方向的钟.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/Jay.JPG" },
+  { name: "轨迹", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/轨迹.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/寻找周杰伦.JPG" },
+  { name: "红尘客栈", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/红尘客栈.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/十二新作.JPG" },
+  { name: "你听得到", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/你听得到.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/叶惠美.JPG" },
+  { name: "七里香", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/七里香.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/七里香.JPG" },
+  { name: "晴天", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/晴天.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/叶惠美.JPG" },
+  { name: "甜甜的", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/甜甜的.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/我很忙.JPG" },
+  { name: "爱的飞行日记", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/爱的飞行日记.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/跨时代.JPG" },
+  { name: "爱在西元前", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/爱在西元前.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/范特西.JPG" },
+  { name: "安静", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/安静.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/Jay.JPG" },
+  { name: "可爱女人", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/可爱女人.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/Jay.JPG" },
+  { name: "龙卷风", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/龙卷风.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/Jay.JPG" },
+  { name: "双截棍", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/双截棍.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/范特西.JPG" },
+  { name: "一路向北", file: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/一路向北.mp3", cover: "https://raw.githubusercontent.com/LittleKathy/musicfiles/main/musiccover/J III MP3 Player.JPG" }
 ];
 
 let currentSongIndex = 0;
@@ -21,13 +28,11 @@ const progressBar = document.getElementById('progressBar');
 const progress = document.getElementById('progress');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
-const volumeSlider = document.getElementById('volumeSlider');
-const volumeIcon = document.getElementById('volumeIcon');
-const volumeValue = document.getElementById('volumeValue');
 const songNameEl = document.getElementById('songName');
 const artistNameEl = document.getElementById('artistName');
 const playlistEl = document.getElementById('playlist');
 const albumImg = document.getElementById('albumImg');
+const vinylRecord = document.getElementById('vinylRecord');
 
 function initPlaylist() {
   playlistEl.innerHTML = '';
@@ -49,6 +54,12 @@ function loadSong(index) {
   artistNameEl.textContent = '周杰伦';
   currentSongIndex = index;
   updatePlaylist();
+
+  if (song.cover) {
+    albumImg.innerHTML = `<img src="${song.cover}" alt="${song.name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+  } else {
+    albumImg.innerHTML = '🎵';
+  }
 }
 
 function playSong(index) {
@@ -56,18 +67,18 @@ function playSong(index) {
   audio.play();
   isPlaying = true;
   playBtn.textContent = '⏸️';
-  albumImg.textContent = '🎵';
+  vinylRecord.classList.add('playing');
 }
 
 function togglePlay() {
   if (isPlaying) {
     audio.pause();
     playBtn.textContent = '▶️';
-    albumImg.textContent = '🎶';
+    vinylRecord.classList.remove('playing');
   } else {
     audio.play();
     playBtn.textContent = '⏸️';
-    albumImg.textContent = '🎵';
+    vinylRecord.classList.add('playing');
   }
   isPlaying = !isPlaying;
 }
@@ -105,20 +116,6 @@ function setProgress(e) {
   audio.currentTime = (clickX / width) * duration;
 }
 
-function setVolume() {
-  const volume = volumeSlider.value / 100;
-  audio.volume = volume;
-  volumeValue.textContent = `${volumeSlider.value}%`;
-
-  if (volume === 0) {
-    volumeIcon.textContent = '🔇';
-  } else if (volume < 0.5) {
-    volumeIcon.textContent = '🔉';
-  } else {
-    volumeIcon.textContent = '🔊';
-  }
-}
-
 function updatePlaylist() {
   const items = playlistEl.getElementsByTagName('li');
   for (let i = 0; i < items.length; i++) {
@@ -134,7 +131,6 @@ prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 audio.addEventListener('timeupdate', updateProgress);
 progressBar.addEventListener('click', setProgress);
-volumeSlider.addEventListener('input', setVolume);
 audio.addEventListener('ended', nextSong);
 
 audio.volume = 0.7;
